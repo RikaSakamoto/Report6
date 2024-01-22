@@ -16,4 +16,25 @@ public class Robot extends LivingThing {
     public Robot(String name, int hp) {
         super(name, hp);
     }
+
+    /**
+     * 指定されたタスク番号に基づいて、ロボットにタスクを実行させる。
+     * 実行されたタスクはHPを減少させる。
+     * @param taskNumber タスクの番号
+     */
+    public void helpSomething(int taskNumber) {
+        LivingThing task = null;
+        switch (taskNumber) {
+            //まずは1つ(+タスク番号外)を用意
+            case 0:
+                task = new LivingThing("部屋の掃除", 10);
+                break;
+                default:
+                System.out.println("無効なタスク番号です。");
+                break;
+        }
+        if (task != null) {
+            performTask(task);
+        }
+    }
 }

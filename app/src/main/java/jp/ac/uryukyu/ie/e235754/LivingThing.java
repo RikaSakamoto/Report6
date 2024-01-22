@@ -76,4 +76,23 @@ public class LivingThing {
         }
         isTurnedOn = false;
     }
+
+    /**
+     * タスクを実行するメソッド。
+     * @param task 実行するタスク
+     */
+    public void performTask(LivingThing task) {
+        if (isTurnedOn) {
+            if (getHp() > 0 && getHp() >= task.getHp()) {
+                System.out.println(getName() + "が" + task.getName() + "をしています。");
+                //リストに要素を追加していく
+                tasks.add(task.getName());    
+            } else {
+                System.out.println("消費量が体力を上回っているので、できません。");
+                turnOff();
+            }
+        } else {
+            System.out.println("起動させてください。");
+        }
+    }
 }
