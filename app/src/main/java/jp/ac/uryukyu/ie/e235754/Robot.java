@@ -25,11 +25,19 @@ public class Robot extends LivingThing {
     public void helpSomething(int taskNumber) {
         LivingThing task = null;
         switch (taskNumber) {
-            //まずは1つ(+タスク番号外)を用意
             case 0:
                 task = new LivingThing("部屋の掃除", 10);
                 break;
-                default:
+            case 1:
+                task = new LivingThing("服の洗濯", 10);
+                break;
+            case 2:
+                task = new LivingThing("料理", 10);
+                break;
+            case 3:
+                task = new LivingThing("修理", 10);
+                break;        
+            default:
                 System.out.println("無効なタスク番号です。");
                 break;
         }

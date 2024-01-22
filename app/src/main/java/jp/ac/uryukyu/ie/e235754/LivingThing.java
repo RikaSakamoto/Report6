@@ -72,9 +72,35 @@ public class LivingThing {
         if (getHp() <= 0) {
             System.out.println(getName() + "の体力はないので停止します。");
         } else {
-            System.out.println(getName() + "は停止しました。");
+            System.out.println("タスク完了！" + getName() + "は停止しました。");
         }
         isTurnedOn = false;
+    }
+
+    /**
+     * 体力を指定された量だけ減少させる。
+     * @param amount 減少させる体力の量
+     */
+    public void decreaseHp(int amount) {
+        this.hp -= amount;
+    }
+
+    /**
+     * タスクの完了状況を表示するメソッド。
+     */
+    public void printCompletionStatus() {
+        for (String taskName : getTasks()) {
+            System.out.println(getName() + "は" + taskName + "を完了しました。");
+        }
+        System.out.printf("残りは、" + "HP %d\n", getHp());
+    }
+
+    /**
+     * タスクを4回完了したかどうかを判定するメソッド。
+     * @return タスクを4回完了した場合はtrue、それ以外はfalse
+     */
+    public boolean allTasksCompleted() {
+        return tasks.size() == 4;
     }
 
     /**
@@ -86,7 +112,12 @@ public class LivingThing {
             if (getHp() > 0 && getHp() >= task.getHp()) {
                 System.out.println(getName() + "が" + task.getName() + "をしています。");
                 //リストに要素を追加していく
-                tasks.add(task.getName());    
+                tasks.add(task.getName());
+                decreaseHp(task.getHp());
+                printCompletionStatus();
+                if (allTasksCompleted()) {
+                    turnOff();
+                }
             } else {
                 System.out.println("消費量が体力を上回っているので、できません。");
                 turnOff();
